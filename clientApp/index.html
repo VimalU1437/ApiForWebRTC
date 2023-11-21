@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>video chat</title>
+  </head>
+  <body>
+    <h1>WebRtc app</h1>
+    <div><button class="offer">Offer</button><button class="answer">Answer</button></div>
+    <div>
+      <div class="chat">
+        <h2 id="user"></h2>
+        <div class="msg"></div>
+        <input type="text" id="text" />
+        <button>Send</button>
+      </div>
+      <div class="video">
+        <video autoplay class="stream"></video>
+      </div>
+    </div>
+
+    <script>
+      const iceConfiguration = {};
+      iceConfiguration.iceServers = [
+        {
+          urls: "stun:stun1.l.google.com:19302",
+        },
+      ];
+      let lc = new RTCPeerConnection(iceConfiguration);
+      let answer;
+      lc.onicecandidate = (e) => {
+        console.log("new ice candidate");
+        console.log(lc.localDescription);
+      };
+    </script>
+  </body>
+</html>
